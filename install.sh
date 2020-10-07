@@ -1,13 +1,14 @@
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.1
+ASDF_BRANCH=v0.7.8
+ERLANG_OTP_VERSION=23.0.3
+ELIXIR_OTP_VERSION=1.10.4-otp-23
+
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
 
 # The following steps are for bash. If you’re using something else, do the
 # equivalent for your shell.
 echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
 echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
 source ~/.bashrc
-
-asdf plugin-add erlang
-asdf plugin-add elixir
 
 # Note #1:
 # If on Debian or Ubuntu, you'll want to install wx before running the next
@@ -18,10 +19,14 @@ asdf plugin-add elixir
 # latest official Nerves systems are compatible with the versions below. In
 # general, differences in patch releases are harmless. Nerves detects
 # configurations that might not work at compile time.
-asdf install erlang 22.3.2
-asdf install elixir 1.10.2-otp-22
-asdf global erlang 22.3.2
-asdf global elixir 1.10.2-otp-22
+
+asdf plugin-add erlang
+asdf install erlang ${ERLANG_OTP_VERSION}
+asdf global erlang ${ERLANG_OTP_VERSION}
+
+asdf plugin-add elixir
+asdf install elixir ${ELIXIR_OTP_VERSION}
+asdf global elixir ${ELIXIR_OTP_VERSION}
 
 mix local.hex --force
 mix local.rebar --force
